@@ -1,38 +1,3 @@
-<#
-Copyright 2019 PricewaterhouseCoopers Advisory N.V.
-	N.B. The idea for this script is based on a script developed by Tehnoon Raza (Microsoft) and published in the following blog:
-	https://blogs.msdn.microsoft.com/tehnoonr/2018/01/26/retrieving-office-365-audit-data-using-
-	powershell/
-	PricewaterhouseCoopers Advisory N.V. (PwC 1 ) has expanded and altered the script.
-Redistribution and use in source and binary forms, with or without modification, are permitted provided that
-the following conditions are met:
-	1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
-	2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the
-	   following disclaimer in the documentation and/or other materials provided with the distribution.
-	3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or
-	   promote products derived from this software without specific prior written permission.
-	
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS &quot;AS IS&quot; AND ANY
-EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
-OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT
-SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
-INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR
-PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
-WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
-OF SUCH DAMAGE.
-HENCE, USE OF THE SCRIPT IS FOR YOUR OWN ACCOUNT, RESPONSIBILITY AND RISK. YOU SHOULD
-NOT USE THE (RESULTS OF) THE SCRIPT WITHOUT OBTAINING PROFESSIONAL ADVICE. PWC DOES
-NOT PROVIDE ANY WARRANTY, NOR EXPLICIT OR IMPLICIT, WITH REGARD TO THE CORRECTNESS
-OR COMPLETENESS OF (THE RESULTS) OF THE SCRIPT. PWC, ITS REPRESENTATIVES, PARTNERS
-AND EMPLOYEES DO NOT ACCEPT OR ASSUME ANY LIABILITY OR DUTY OF CARE FOR ANY
-(POSSIBLE) CONSEQUENCES OF ANY ACTION OR OMISSION BY ANYONE AS A CONSEQUENCE OF THE
-USE OF (THE RESULTS OF) SCRIPT OR ANY DECISION BASED ON THE USE OF THE INFORMATION
-CONTAINED IN (THE RESULTS OF) THE SCRIPT.
-‘PwC’ refers to the PwC network and/or one or more of its member firms. Each member firm in the PwC
-network is a separate legal entity. For further details, please see www.pwc.com/structure.
-#>
 
 $menupart1=@"
    ____     __    __   _                   ____      __    _____     ______          _                           _                  
@@ -123,8 +88,7 @@ function Main{
 		$StartDate = Get-StartDate
 		$EndDate = Get-EndDate
 		
-		$UserCredential = Get-Credential
-		Connect-ExchangeOnline -Credential $UserCredential
+		Connect-ExchangeOnline
 		
 		$RecordTypes = "ExchangeAdmin","ExchangeItem","ExchangeItemGroup","SharePoint","SyntheticProbe","SharePointFileOperation","OneDrive","AzureActiveDirectory","AzureActiveDirectoryAccountLogon","DataCenterSecurityCmdlet","ComplianceDLPSharePoint","Sway","ComplianceDLPExchange","SharePointSharingOperation","AzureActiveDirectoryStsLogon","SkypeForBusinessPSTNUsage","SkypeForBusinessUsersBlocked","SecurityComplianceCenterEOPCmdlet","ExchangeAggregatedOperation","PowerBIAudit","CRM","Yammer","SkypeForBusinessCmdlets","Discovery","MicrosoftTeams","ThreatIntelligence","MailSubmission","MicrosoftFlow","AeD","MicrosoftStream","ComplianceDLPSharePointClassification","ThreatFinder","Project","SharePointListOperation","SharePointCommentOperation","DataGovernance","Kaizala","SecurityComplianceAlerts","ThreatIntelligenceUrl","SecurityComplianceInsights","MIPLabel","WorkplaceAnalytics","PowerAppsApp","PowerAppsPlan","ThreatIntelligenceAtpContent","LabelContentExplorer","TeamsHealthcare","ExchangeItemAggregated","HygieneEvent","DataInsightsRestApiAudit","InformationBarrierPolicyApplication","SharePointListItemOperation","SharePointContentTypeOperation","SharePointFieldOperation","MicrosoftTeamsAdmin","HRSignal
 ","MicrosoftTeamsDevice","MicrosoftTeamsAnalytics","InformationWorkerProtection","Campaign","DLPEndpoint","AirInvestigation","Quarantine","MicrosoftForms","ApplicationAudit","ComplianceSupervisionExchange","CustomerKeyServiceEncryption","OfficeNative","MipAutoLabelSharePointItem","MipAutoLabelSharePointPolicyLocation","MicrosoftTeamsShifts","MipAutoLabelExchangeItem","CortanaBriefing","Search","WDATPAlerts","MDATPAudit"
@@ -197,8 +161,7 @@ function Main{
 		[DateTime]$CurrentStart = $StartDate
 		[DateTime]$CurrentEnd = $EndDate
 		
-		$UserCredential = Get-Credential
-		Connect-ExchangeOnline -Credential $UserCredential
+		Connect-ExchangeOnline
 		
 		echo ""
 		Write-Host "------------------------------------------------------------------------------------------"
@@ -361,8 +324,7 @@ function Main{
 		Write-LogFile "End date provided by user: $EndDate"
 		Write-Logfile "Time interval provided by user: $IntervalMinutes"
 		
-		$UserCredential = Get-Credential
-		Connect-ExchangeOnline -Credential $UserCredential
+		Connect-ExchangeOnline
 		
 		echo ""
 		Write-Host "----------------------------------------------------------------------------"
@@ -526,8 +488,7 @@ function Main{
 		Write-LogFile "Start date provided by user: $StartDate"
 		Write-LogFile "End date provided by user: $EndDate"
 		Write-Logfile "Time Interval provided by user: $IntervalMinutes"
-		$UserCredential = Get-Credential
-		Connect-ExchangeOnline -Credential $UserCredential
+		Connect-ExchangeOnline
 		echo ""
 		Write-Host "----------------------------------------------------------------------------"
 		Write-Host "|Extracting audit logs between "$StartDate" and "$EndDate"|"
@@ -709,3 +670,5 @@ Following actions are supported by this script:
 	Main}}
 	
 Menu
+
+Disconnect-ExchangeOnline -Confirm:$false
