@@ -1,4 +1,4 @@
-#Ammended from the orignal PwC script to include MFA
+#Amended from the orignal PwC script to include MFA
 $menupart1=@"
    ____     __    __   _                   ____      __    _____     ______          _                           _                  
   / __ \   / _|  / _| (_)                 |___ \    / /   | ____|   |  ____|        | |                         | |                 
